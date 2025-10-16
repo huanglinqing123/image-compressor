@@ -27,17 +27,17 @@
 ## 📸 界面展示
 
 ### 主界面 - 拖放上传区域
-![主界面](screenshot/screenshot-main.png)
+<img src="screenshot/screenshot-main.png" alt="主界面" width="600"/>
 
 简洁明了的主界面，支持拖放上传和点击选择文件。
 
 ### 压缩设置界面
-![压缩设置](screenshot/screenshot-2.png)
+<img src="screenshot/screenshot-2.png" alt="压缩设置" width="600"/>
 
 提供预设质量选择和自定义质量滑块，满足不同压缩需求。
 
 ### 压缩结果展示
-![压缩结果](screenshot/screenshot-3.png)
+<img src="screenshot/screenshot-3.png" alt="压缩结果" width="600"/>
 
 详细的压缩结果对比，包括原始图片与压缩后图片的尺寸、大小对比，以及压缩率统计。
 
@@ -248,10 +248,10 @@ npm run format
 
 **社交媒体**
 - **小红书**: @合肥程序员
-  ![小红书](screenshot/xhs.jpg)
+  <img src="screenshot/xhs.jpg" alt="小红书" width="150"/>
 
 - **微信**:
-  ![微信](screenshot/wx.png)
+  <img src="screenshot/wx.png" alt="微信" width="150"/>
 
 - **GitHub**: huanglinqing123
 
