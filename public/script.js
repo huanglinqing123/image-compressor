@@ -2,6 +2,7 @@ class ImageCompressor {
     constructor() {
         this.uploadedFiles = [];
         this.compressedImages = [];
+        this.previewImages = [];
         this.currentQuality = 70;
         this.init();
     }
@@ -16,6 +17,8 @@ class ImageCompressor {
         this.uploadArea = document.getElementById('uploadArea');
         this.fileInput = document.getElementById('fileInput');
         this.uploadBtn = document.querySelector('.upload-btn');
+        this.previewSection = document.getElementById('previewSection');
+        this.previewGrid = document.getElementById('previewGrid');
         this.settingsSection = document.getElementById('settingsSection');
         this.processingSection = document.getElementById('processingSection');
         this.resultsSection = document.getElementById('resultsSection');
@@ -74,7 +77,7 @@ class ImageCompressor {
         this.processFiles(files);
     }
 
-    processFiles(files) {
+    async processFiles(files) {
         const imageFiles = files.filter(file => file.type.startsWith('image/'));
 
         if (imageFiles.length === 0) {
@@ -83,6 +86,9 @@ class ImageCompressor {
         }
 
         this.uploadedFiles = imageFiles;
+        this.previewImages = [];
+        await this.generatePreviews();
+        this.showPreviewSection();
         this.showSettingsSection();
         this.showNotification(`已选择 ${imageFiles.length} 张图片`, 'success');
     }
@@ -90,6 +96,74 @@ class ImageCompressor {
     showSettingsSection() {
         this.settingsSection.style.display = 'block';
         this.settingsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    showPreviewSection() {
+        this.previewSection.style.display = 'block';
+    }
+
+    async generatePreviews() {
+        for (let i = 0; i < this.uploadedFiles.length; i++) {
+            const file = this.uploadedFiles[i];
+            const preview = await this.createPreview(file);
+            this.previewImages.push(preview);
+        }
+        this.renderPreviews();
+    }
+
+    createPreview(file) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                resolve({
+                    name: file.name,
+                    size: file.size,
+                    url: e.target.result
+                });
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    renderPreviews() {
+        this.previewGrid.innerHTML = '';
+
+        this.previewImages.forEach((image, index) => {
+            const previewCard = this.createPreviewCard(image, index);
+            this.previewGrid.appendChild(previewCard);
+        });
+    }
+
+    createPreviewCard(image, index) {
+        const card = document.createElement('div');
+        card.className = 'preview-card';
+
+        card.innerHTML = `
+            <div class="preview-image">
+                <img src="${image.url}" alt="${image.name}">
+            </div>
+            <div class="preview-info">
+                <div class="preview-title" title="${image.name}">${image.name}</div>
+                <div class="preview-size">${this.formatFileSize(image.size)}</div>
+                <button class="remove-btn" onclick="imageCompressor.removeImage(${index})">
+                    移除
+                </button>
+            </div>
+        `;
+
+        return card;
+    }
+
+    removeImage(index) {
+        this.uploadedFiles.splice(index, 1);
+        this.previewImages.splice(index, 1);
+
+        if (this.uploadedFiles.length === 0) {
+            this.reset();
+        } else {
+            this.renderPreviews();
+            this.showNotification(`已移除图片，剩余 ${this.uploadedFiles.length} 张`, 'info');
+        }
     }
 
     handleQualityChange(e) {
@@ -308,9 +382,11 @@ class ImageCompressor {
     reset() {
         this.uploadedFiles = [];
         this.compressedImages = [];
+        this.previewImages = [];
         this.currentQuality = 70;
 
         // 重置UI
+        this.previewSection.style.display = 'none';
         this.settingsSection.style.display = 'none';
         this.processingSection.style.display = 'none';
         this.resultsSection.style.display = 'none';
