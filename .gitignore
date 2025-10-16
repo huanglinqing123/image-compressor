@@ -131,6 +131,11 @@ test-*.jpg
 test-*.png
 test-*.webp
 
+# Marketing files (keep local only)
+*推广*.md
+*公众号*.md
+*文章*.md
+
 # IDE files
 .vscode/
 .idea/
