@@ -247,10 +247,10 @@ npm run format
 如有问题、建议或合作意向，欢迎联系：
 
 **社交媒体**
-- **小红书**: @合肥程序员
+- **小红书**: @合肥程序员 </br>
   <img src="screenshot/xhs.jpg" alt="小红书" width="150"/>
 
-- **微信**:
+- **微信**:  </br>
   <img src="screenshot/wx.png" alt="微信" width="150"/>
 
 - **GitHub**: huanglinqing123
