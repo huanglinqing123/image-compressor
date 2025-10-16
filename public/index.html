@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片压缩工具 - 免费在线图片压缩处理</title>
+    <meta name="description" content="免费的在线图片压缩工具，支持JPG、PNG、WebP等格式，可自定义压缩质量，快速减小图片文件大小">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="8" fill="#10b981"/>
+                    <path d="M20 10L28 18L20 26L12 18L20 10Z" fill="white"/>
+                </svg>
+                <h1>图片压缩工具</h1>
+            </div>
+            <p class="subtitle">免费在线压缩图片，减小文件大小，保持图片质量</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- 上传区域 -->
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <svg class="upload-icon" width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <circle cx="32" cy="32" r="24" stroke="#10b981" stroke-width="2"/>
+                            <path d="M32 20V44M20 32H44" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <h3>拖放图片到这里</h3>
+                        <p>或者点击选择文件</p>
+                        <button class="upload-btn">选择图片</button>
+                        <input type="file" id="fileInput" accept="image/*" multiple hidden>
+                        <div class="supported-formats">
+                            支持格式：JPG、PNG、WebP、GIF、BMP
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 压缩设置 -->
+            <section class="settings-section" id="settingsSection" style="display: none;">
+                <h3>压缩设置</h3>
+                <div class="quality-settings">
+                    <div class="preset-buttons">
+                        <button class="preset-btn" data-quality="90">高质量</button>
+                        <button class="preset-btn active" data-quality="70">推荐</button>
+                        <button class="preset-btn" data-quality="50">中等质量</button>
+                        <button class="preset-btn" data-quality="30">低质量</button>
+                    </div>
+                    <div class="custom-quality">
+                        <label for="qualitySlider">自定义质量: <span id="qualityValue">70</span>%</label>
+                        <input type="range" id="qualitySlider" min="10" max="100" value="70" step="5">
+                    </div>
+                </div>
+                <button class="compress-btn" id="compressBtn">开始压缩</button>
+            </section>
+
+            <!-- 图片处理区域 -->
+            <section class="processing-section" id="processingSection" style="display: none;">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">正在处理图片...</p>
+                </div>
+            </section>
+
+            <!-- 结果展示区域 -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h3>压缩结果</h3>
+                <div class="results-grid" id="resultsGrid"></div>
+                <div class="batch-actions">
+                    <button class="download-all-btn" id="downloadAllBtn">下载所有压缩图片</button>
+                    <button class="reset-btn" id="resetBtn">重新开始</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 图片压缩工具. 保护您的隐私，所有图片均在本地处理。</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
